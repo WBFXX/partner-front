@@ -26,6 +26,6 @@ export const useUserStore = defineStore('user', {
             this.loginInfo.user = JSON.parse(JSON.stringify(user))
         }
     },
-    // 开启数据持久化
+    // pinia开启数据持久化
     persist: true
 })
