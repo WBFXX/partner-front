@@ -33,8 +33,8 @@ const router = createRouter({
 // 路由守卫
 router.beforeEach((to, from, next) => {
     const store = useUserStore()  // 拿到用户对象信息
-    // const user = store.loginInfo.user
-    const user = store.loginInfo //从useUserStore拿来的，不应该叫user，也许以后会改，插个眼
+    const user = store.loginInfo.user
+    // const user = store.loginInfo //从useUserStore拿来的，不应该叫user，也许以后会改，插个眼
     const hasUser = user && user.id
     const noPermissionPaths = ['/login', '/register']   // 定义无需登录的路由
     if (!hasUser && !noPermissionPaths.includes(to.path)) {

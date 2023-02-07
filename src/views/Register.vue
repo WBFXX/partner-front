@@ -99,16 +99,18 @@ const sendEmail = () => {
     ElMessage.error("请输入合法的邮箱！")
     return
   }
-  //清空定时器
-  if (interval.value>0) {
-    clearInterval(interval.value)
-  }
-  time.value = 60 //倒计时
-    interval.value = setInterval(()=>{
-    if(time.value>0) {
-      time.value--;
+  const times = () => {
+    //清空定时器
+    if (interval.value>0) {
+      clearInterval(interval.value)
     }
-  },1000)
+    time.value = 60 //倒计时
+    interval.value = setInterval(()=>{
+      if(time.value>0) {
+        time.value--;
+      }
+    },1000)
+  }
 
   request.get("/email", {
       params:{
@@ -120,6 +122,7 @@ const sendEmail = () => {
 
     if (res.code === '200') {
       ElMessage.success('发送成功，有效期5分钟')
+      times() //后台发送成功之后 再进行倒计时
     } else {
       ElMessage.error(res.msg)
     }
@@ -133,9 +136,8 @@ const register = () => {
           request.post("/register", form).then(res => {
                 if (res.code === '200') {
                   //   store.$patch({user: res.data})   // res.data 是后台返回的用户数据，存储到缓存里面
-                  store.setUser(res.data)
                   ElMessage.success('注册成功')
-                  router.push('/')//根据setlogininfo缓存信息跳转到主页
+                  router.push('/login')//根据setlogininfo缓存信息跳转到主页
                 } else {
                   ElMessage.error(res.msg)
                 }

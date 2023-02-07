@@ -115,16 +115,19 @@ const sendEmail = () => {
     ElMessage.error("请输入合法的邮箱！")
     return
   }
-  //清空定时器
-  if (interval.value > 0) {
-    clearInterval(interval.value)
-  }
-  time.value = 60 //倒计时
-  interval.value = setInterval(() => {
-    if (time.value > 0) {
-      time.value--;
+//倒计时方法
+  const times = () => {
+    //清空定时器
+    if (interval.value > 0) {
+      clearInterval(interval.value)
     }
-  }, 1000)
+    time.value = 60 //倒计时
+    interval.value = setInterval(() => {
+      if (time.value > 0) {
+        time.value--;
+      }
+    }, 1000)
+  }
 
   request.get("/email", {
     params: {
@@ -133,6 +136,7 @@ const sendEmail = () => {
     }
   }).then(res => {
     if (res.code === '200') {
+      times();//倒计时
       ElMessage.success('发送成功，有效期5分钟')
     } else {
       ElMessage.error(res.msg)
