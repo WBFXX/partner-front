@@ -6,8 +6,16 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            name: 'home',
-            component: () => import('../views/HomeView.vue')
+            name: 'Layout',
+            redirect: '/home',//重定向到home,在登陆后重新定位到home
+            component: () => import('../layout/Layout.vue'),
+            children:[
+                {
+                    path: 'home',
+                    name: 'Home',
+                    component: () => import('../views/HomeView.vue'),
+                }
+            ]
         },
         {
             path: '/login',
