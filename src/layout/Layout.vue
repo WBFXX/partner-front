@@ -1,5 +1,5 @@
 <template>
-  <div style="background-color: aliceblue">
+  <div>
     <!-- 头部 -->
     <div style="display: flex; height: 60px;background-color: white;line-height: 60px;border-bottom: 1px solid #ddd">
       <div style="width: 200px;display: flex">
@@ -38,11 +38,11 @@
             <span style="position: relative;left: 10px;top: -4px;font-size: 14px;font-family: 微软雅黑 ,serif">
               {{store.loginInfo.user.name }}
             </span>
-          <el-icon class="el-icon--right"><arrow-down/></el-icon>
+          <el-icon class="el-icon--right" style="margin-left: 10px"><arrow-down/></el-icon>
         </div>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>个人信息</el-dropdown-item>
+              <el-dropdown-item @click="router.push('/personCenter')">个人信息</el-dropdown-item>
               <el-dropdown-item>修改密码</el-dropdown-item>
               <el-dropdown-item>
                 <div @click="logout">退出登录</div>
@@ -54,7 +54,7 @@
     </div>
     <!-- 主体 -->
     <div
-        style="margin: 10px auto;width: 80%; min-height: calc(100vh - 80px);background-color: white;border-radius: 8px">
+        style="margin: 10px auto 0px auto;width: 60%; ">
       <router-view></router-view> <!-- 加载子路由的视图 -->
 
 
@@ -66,6 +66,7 @@
 <script setup>
 
 import {useUserStore} from "@/stores/user";
+import { ArrowDown } from '@element-plus/icons-vue'
 
 const store = useUserStore()
 const logout = () => {

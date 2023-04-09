@@ -9,5 +9,5 @@ load()
 </script>
 
 <template>
-  <div>主页</div>
+  <div style="background-color: white;border-radius: 10px;" class="container-height">主页</div>
 </template>

@@ -16,8 +16,7 @@ const request = axios.create({
 // 比如统一加token，对请求参数统一加密
 request.interceptors.request.use(config => {
     config.headers['Content-Type'] = 'application/json;charset=utf-8';
-    const token = useUserStore().loginInfo.token;
-    config.headers['Authorization'] = 'Bearer ' + token;  // 设置请求头
+    config.headers['Authorization'] = useUserStore().getBearerToken;  // 设置请求头
 
     return config
 }, error => {
