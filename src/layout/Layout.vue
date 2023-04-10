@@ -32,10 +32,10 @@
       </div><!--菜单区域 -->
 
       <div style="width: 200px">
-        <el-dropdown :hide-on-click="false">
+        <el-dropdown :hide-on-click="false" style="line-height: 60px">
         <div class="el-dropdown-link">
-          <el-avatar :size="40" :src="circleUrl" style="position: relative;top: 10px"/>
-            <span style="position: relative;left: 10px;top: -4px;font-size: 14px;font-family: 微软雅黑 ,serif">
+          <el-avatar :size="40" :src="store.loginInfo.user.avatar" style="position: absolute;top: 10px"/>
+            <span style="font-size: 14px; margin-left:45px;pxfont-family: 微软雅黑 ,serif">
               {{store.loginInfo.user.name }}
             </span>
           <el-icon class="el-icon--right" style="margin-left: 10px"><arrow-down/></el-icon>
@@ -66,6 +66,7 @@
 <script setup>
 
 import {useUserStore} from "@/stores/user";
+import router from "@/router";
 import { ArrowDown } from '@element-plus/icons-vue'
 
 const store = useUserStore()
@@ -74,10 +75,7 @@ const logout = () => {
   router.push("/login")
 }
 
-import {ref} from "vue";
-import router from "@/router";
 
-const circleUrl = ref('https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png')
 
 
 

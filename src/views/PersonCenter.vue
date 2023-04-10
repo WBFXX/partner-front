@@ -4,9 +4,9 @@
     <div style="width: 240px;padding: 20px" class="box">
 
       <ul>
-        <li>个人资料</li>
-        <li>消息提醒</li>
-        <li>我的动态</li>
+        <li class="menu-active"><el-icon class="menu-icon"><User /></el-icon>个人资料</li>
+        <li><el-icon class="menu-icon"><Message /></el-icon>消息提醒</li>
+        <li><el-icon class="menu-icon"><Promotion /></el-icon>我的动态</li>
 
       </ul>
 
@@ -29,7 +29,7 @@
           </el-upload>
         </el-form-item>
         <el-form-item label="用户名">
-          <el-input v-model="state.user.username" />
+          <el-input v-model="state.user.username" disabled/>
         </el-form-item>
         <el-form-item label="姓名">
           <el-input v-model="state.user.name" />
@@ -38,7 +38,7 @@
           <el-input v-model="state.user.email" />
         </el-form-item>
         <el-form-item label="">
-          <el-button type="primary">保存</el-button>
+          <el-button type="primary" @click="save">保存</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -51,7 +51,7 @@ import {reactive, ref} from "vue";
 import request from "@/utils/request";
 import {useUserStore} from "@/stores/user";
 import config from "../../config";
-import { Plus } from '@element-plus/icons-vue'
+import {Plus,User,Message,Promotion} from '@element-plus/icons-vue'
 import {ElMessage} from "element-plus";
 
 let store = useUserStore();
@@ -79,8 +79,18 @@ const handleAvatarSuccess = (res) => {
   }
 
 }
+const save = () => {
+  request.put('/user',state.user).then(res =>{
+    if (res.code === '200'){
+      ElMessage.success('保存成功')
+      store.setUser(state.user)
+    }else {
+      ElMessage.error(res.msg)
+    }
+  })
+}
 </script>
-<style>
+<style scoped>
 .box{
   background-color: white;
   border-radius: 10px;
@@ -88,14 +98,22 @@ const handleAvatarSuccess = (res) => {
 }
 
 li{
+  font-size: 16px;
   text-align: center;
   margin: 15px;
   cursor: pointer;
 }
 
-.avatar-uploader .avatar {
-  width: 178px;
-  height: 178px;
-  display: block;
+.avatar{
+  width: 100px;
+  height: 100px;
+}
+
+.menu-icon{
+  margin-right: 5px;
+  top: 2px;
+}
+.menu-active{
+  color: dodgerblue;
 }
 </style>
