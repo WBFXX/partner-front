@@ -23,7 +23,7 @@ export const useUserStore = defineStore('user', {
             this.loginInfo = loginInfo
         },
         setUser(user) {
-            this.loginInfo.user = JSON.parse(JSON.stringify(user))
+            this.loginInfo.user = JSON.parse(JSON.stringify(user)) //用JSON这个User，跟内存中的user分离，可以避免修改的同步
         }
     },
     // pinia开启数据持久化

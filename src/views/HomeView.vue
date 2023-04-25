@@ -51,7 +51,8 @@ load()
         <div style="margin: 10px 0;display: flex;line-height: 25px">
           <div style="width: 50%">
             <el-tag type="primary"># 冬至到了</el-tag>
-            <el-tag type="danger" style="margin-left: 10px;" ><el-icon :size="14" style="top: 2px;position: relative"><Compass /></el-icon>  圈子</el-tag>
+            <el-tag type="danger" style="margin-left: 10px;font-size: 13px"><el-icon :size="20" style="top: 2px;font-size: 14px;position: relative"><Compass /></el-icon>  圈子</el-tag>
+
           </div>
           <div style="width: 50%;text-align: right;color: #999;font-size: 14px">
             <el-icon><View /></el-icon> 20
@@ -83,5 +84,6 @@ load()
   line-height: 25px;
   text-align: justify
 }
+
 
 </style>

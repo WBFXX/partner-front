@@ -34,16 +34,15 @@
       <div style="width: 200px">
         <el-dropdown :hide-on-click="false" style="line-height: 60px">
         <div class="el-dropdown-link">
-          <el-avatar :size="40" :src="store.loginInfo.user.avatar" style="position: absolute;top: 10px"/>
-            <span style="font-size: 14px; margin-left:45px;pxfont-family: 微软雅黑 ,serif">
-              {{store.loginInfo.user.name }}
-            </span>
-          <el-icon class="el-icon--right" style="margin-left: 10px"><arrow-down/></el-icon>
+          <el-avatar :size="40" :src="store.loginInfo.user.avatar" style="position: relative;top: 10px"/>
+<!--            <span style="font-size: 14px; margin-left:45px;pxfont-family: 微软雅黑 ,serif">-->
+<!--              {{store.loginInfo.user.name }}-->
+<!--            </span>-->
+<!--          <el-icon class="el-icon&#45;&#45;right" style="margin-left: 10px"><arrow-down/></el-icon>-->
         </div>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item @click="router.push('/personCenter')">个人信息</el-dropdown-item>
-              <el-dropdown-item>修改密码</el-dropdown-item>
+              <el-dropdown-item @click="router.push('/personCenter')">个人中心</el-dropdown-item>
               <el-dropdown-item>
                 <div @click="logout">退出登录</div>
               </el-dropdown-item>
