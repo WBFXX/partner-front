@@ -11,7 +11,7 @@
           <el-input v-model="form.password" placeholder="请输入密码" type="password"
                     autocomplete="new-password" :prefix-icon="Lock"></el-input>
         </el-form-item>
-        <div style="margin-bottom: 0.83em" @click="login">
+        <div style="margin-bottom: 0.83em" @keyup.enter="keyDown" @click="login">
           <el-button style="width: 100%" type="primary">登录</el-button>
         </div>
         <div style="float: right">
@@ -52,7 +52,7 @@
 </template>
 
 <script setup>
-import {nextTick, reactive, ref} from "vue"
+import {nextTick, onMounted, onUnmounted, reactive, ref} from "vue"
 //import {FormInstance, FormRules} from 'element-plus'
 import {User, Lock} from '@element-plus/icons-vue'
 import router from "@/router";
@@ -91,7 +91,6 @@ const login = () => {
         //当valid== true 就调用登录
         if (valid) {
           request.post("/login", form).then(res => {
-                console.log(res)
                 if (res.code === '200') {
                   //   store.$patch({user: res.data})   // res.data 是后台返回的用户数据，存储到缓存里面
                   store.setLoginInfo(res.data)
@@ -172,7 +171,19 @@ const resetPassword = () => {
       }
   )
 }
-
+//回车登录
+onMounted(() => {
+  window.addEventListener('keydown', keyDown)
+})
+const keyDown = (e) => {
+  //如果是回车则执行登录方法
+  if (e.keyCode === 13) {
+    login()
+  }
+}
+onUnmounted(() => {
+  window.removeEventListener('keydown', keyDown, false)
+})
 
 </script>
 

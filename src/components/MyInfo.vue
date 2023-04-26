@@ -60,7 +60,7 @@ loaduser()
 const url = ref('http://' + config.serverUrl + "/file/upload")
 const handleAvatarSuccess = (res) => {
   if (res.code === '200'){
-    state.user.avatar = res.data + "?loginId=" + store.getUser.uid + "&token=" + store.getToken
+    state.user.avatar = res.data //+ "?loginId=" + store.getUser.uid + "&token=" + store.getToken
     ElMessage.success('上传成功')
   }else if (res.code === '500') {
     ElMessage.error('文件太大，请上传更小的图片')

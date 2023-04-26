@@ -13,12 +13,14 @@
       </div><!--logo -->
       <div style="flex: 1;padding-left: 50px">
         <el-menu
+            style="border: none"
             :default-active="$route.path"
             class="el-menu-demo"
             mode="horizontal"
             router
         >
           <el-menu-item index="/home">首页</el-menu-item>
+          <el-menu-item index="/im">聊天室</el-menu-item>
           <el-menu-item index="/">动态</el-menu-item>
           <el-menu-item index="/">考研加油站</el-menu-item>
           <el-sub-menu index="2">
@@ -34,7 +36,7 @@
       <div style="width: 200px">
         <el-dropdown :hide-on-click="false" style="line-height: 60px">
         <div class="el-dropdown-link">
-          <el-avatar :size="40" :src="store.loginInfo.user.avatar" style="position: relative;top: 10px"/>
+          <el-avatar :size="40" :src="avatar" style="position: relative;top: 10px"/>
 <!--            <span style="font-size: 14px; margin-left:45px;pxfont-family: 微软雅黑 ,serif">-->
 <!--              {{store.loginInfo.user.name }}-->
 <!--            </span>-->
@@ -42,7 +44,7 @@
         </div>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item @click="router.push('/personCenter')">个人中心</el-dropdown-item>
+              <el-dropdown-item @click="router.push('/personCenter?page=myInfo')">个人中心</el-dropdown-item>
               <el-dropdown-item>
                 <div @click="logout">退出登录</div>
               </el-dropdown-item>
@@ -66,14 +68,18 @@
 
 import {useUserStore} from "@/stores/user";
 import router from "@/router";
-import { ArrowDown } from '@element-plus/icons-vue'
+import {ref} from "vue";
 
 const store = useUserStore()
 const logout = () => {
   localStorage.removeItem("user")
   router.push("/login")
 }
-
+const avatar = ref('')
+const user = store.getUser
+if (user.avatar){
+  avatar.value = user.avatar
+}
 
 
 

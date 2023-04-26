@@ -18,7 +18,13 @@ const router = createRouter({
                     path: 'personCenter',
                     name: 'PersonCenter',
                     component: () => import('../views/PersonCenter.vue')
+                },
+                {
+                    path: '/im',
+                    name: 'Im',
+                    component: () => import('../views/im.vue')
                 }
+
             ]
         },
         {
@@ -26,6 +32,7 @@ const router = createRouter({
             name: 'Login',
             component: () => import('../views/Login.vue')
         },
+
         {
             path: '/register',
             name: 'Register',
@@ -48,7 +55,7 @@ router.beforeEach((to, from, next) => {
     const user = store.loginInfo.user
     // const user = store.loginInfo //从useUserStore拿来的，不应该叫user，也许以后会改，插个眼
     const hasUser = user && user.id
-    const noPermissionPaths = ['/login', '/register']   // 定义无需登录的路由
+    const noPermissionPaths = ['/login', '/register','/home']   // 定义无需登录的路由
     if (!hasUser && !noPermissionPaths.includes(to.path)) {
         // 用户没登录,  假如你当前跳转login页面，然后login页面没有用户信息，这个时候你再去往 login页面跳转，就会发生无限循环跳转
         // 获取缓存的用户数据
